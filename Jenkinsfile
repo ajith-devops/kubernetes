@@ -2,10 +2,11 @@ pipeline {
     agent any
 
     stages {
-
-        stage('Clone Repository') {
+        stage('Checkout') {
             steps {
-                git 'https://github.com/ajith-devops/kubernetes.git'
+                // Use correct branch name (replace 'main' if different)
+                git branch: 'main',
+                    url: 'https://github.com/ajith-devops/kubernetes.git'
             }
         }
 
