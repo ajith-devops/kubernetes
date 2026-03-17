@@ -1,6 +1,6 @@
 pipeline {
     agent any
-    
+ 
     environment {
         DOCKERHUB_CREDENTIALS = credentials('dockerhub-id') // Jenkins credentials ID
         IMAGE_NAME = 'ajithkumar14542/devops-demo'
@@ -40,8 +40,13 @@ pipeline {
                     sh "docker push $IMAGE_NAME:latest"
                 }
             }
-        }        
+        }
 
+        stage('Deploy to Kubernetes') {
+            steps {
+                sh 'kubectl apply -f k8s-deployment.yaml'
+            }
+        }
     }
 
     post {
